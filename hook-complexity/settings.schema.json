@@ -1,0 +1,90 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "classifier_model",
+    "tiers"
+  ],
+  "properties": {
+    "classifier_model": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "min_confidence": {
+      "type": "number",
+      "maximum": 1,
+      "default": 0.7,
+      "minimum": 0
+    },
+    "missing_confidence": {
+      "enum": [
+        "abstain",
+        "accept"
+      ],
+      "default": "abstain"
+    },
+    "previous_messages": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 32,
+      "default": 0
+    },
+    "max_input_bytes": {
+      "type": "integer",
+      "minimum": 256,
+      "maximum": 65536,
+      "default": 16384
+    },
+    "tiers": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 32,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "description",
+          "candidates"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "examples": {
+            "type": "array",
+            "maxItems": 16,
+            "items": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          "candidates": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 128,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            }
+          }
+        }
+      }
+    },
+    "mode": {
+      "enum": [
+        "prefer"
+      ],
+      "default": "prefer"
+    }
+  }
+}

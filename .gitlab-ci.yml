@@ -1,0 +1,12 @@
+# The project CI configuration must select the owner-approved immutable revision of
+# ci/architecture-pipeline.yml in GetBusbar/busbar. This file cannot grant admission.
+# Unregistered scaffolds fail closed until the canonical policy classifies their
+# repository, kind, package paths and open-source/enterprise distribution.
+workflow:
+  rules:
+    - when: always
+
+admission-not-configured:
+  script:
+    - echo 'Register this plugin in the trusted architecture policy and configure protected GitLab admission.'
+    - exit 1
